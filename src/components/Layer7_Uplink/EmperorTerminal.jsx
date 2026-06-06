@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { UPLINK_COMMANDS } from '../../utils/constants';
 
-export default function EmperorTerminal() {
+export default function EmperorTerminal({ onNavigate }) {
   const [history, setHistory] = useState([
     { type: 'system', text: 'AIN Uplink Terminal v3.0' },
     { type: 'system', text: 'Type /help for commands. Press 0-7 to navigate.' },
@@ -18,13 +18,12 @@ export default function EmperorTerminal() {
   const handleCommand = (e) => {
     e.preventDefault();
     if (!input.trim() || isProcessing) return;
-    const raw = input.trim();
+    let raw = input.trim();
     setInput('');
-    const parts = raw.split(/\s+/);
-    const cmd = parts[0].toLowerCase();
 
-    if (cmd === '/clear') { setHistory([{ type: 'system', text: 'Terminal cleared.' }]); return; }
-    if (cmd === '/contact') {
+    if (raw.toLowerCase() === '/clear') { setHistory([{ type: 'system', text: 'Terminal cleared.' }]); return; }
+    if (raw.toLowerCase().startsWith('/contact')) {
+      const parts = raw.split(/\s+/);
       const msg = parts.slice(2).join(' ').replace(/"/g, '');
       if (!msg) { setHistory(prev => [...prev, { type: 'input', text: raw }, { type: 'error', text: 'Usage: /contact --email "message"' }]); return; }
       setHistory(prev => [...prev, { type: 'input', text: raw }, { type: 'output', text: 'Encrypting channel...', color: '#FFD700' }]);
@@ -33,11 +32,55 @@ export default function EmperorTerminal() {
       return;
     }
 
+    // Natural language recognition
+    const naturalLanguageMap = {
+      'sentinel': '/ask sentinel',
+      'tell me about sentinel': '/ask sentinel',
+      'cerberus': '/ask cerberus',
+      'tell me about cerberus': '/ask cerberus',
+      'who are you': '/ask identity',
+      'what do you build': '/ask projects',
+      'show research': '/research',
+      'what makes arjun different': '/ask unique',
+      'explain the ml pipeline': '/ask ml',
+      'projects': '/projects',
+      'research': '/research',
+      'security': '/security',
+    };
+    const nlMatch = naturalLanguageMap[raw.toLowerCase().trim()];
+    if (nlMatch) raw = nlMatch;
+
+    const parts = raw.split(/\s+/);
+    const cmd = parts[0].toLowerCase();
+
     // Handle /ask with topic
     if (cmd === '/ask' && parts.length > 1) {
       const topic = parts[1].toLowerCase();
-      const response = UPLINK_COMMANDS['/ask'].responses[topic] || UPLINK_COMMANDS['/ask'].responses['default'];
+      const customResponses = {
+        sentinel: "SENTINEL — Secure Distributed IDS\n3.5M network flow records analyzed\n10 attack classes · 99.7% detection accuracy\nStack: Java · Flask · XGBoost · AES-256\nStatus: IEEE paper submitted\n→ Press 2 to open Security Operations",
+        cerberus: "CERBERUS — IoT Malware Detection\n455K+ PCAP samples · 8 malware classes\n57% feature reduction via hybrid selection\n~88% XGBoost accuracy on imbalanced data\nStatus: IEEE/Scopus submission in progress\n→ Press 3 to open Research Lab",
+        identity: "AIN — Arjun Intelligence Network\nOperator: Arjun Pakhan\nDomain: Cybersecurity × ML × GPU Computing\nActive projects: 3 · Papers: 2 · Agents: 6\nCurrently: TIP internship @ Maincrafts Technology\n→ Type /projects for full operation list",
+        unique: "Differentiators:\n→ Built GPU-accelerated IDS with CUDA + NVIDIA NIM\n→ Published neurofinance research on Gen Z UPI behavior\n→ Multi-agent AI system running 405B parameters locally\n→ Systems thinker — not just model builder\n→ Type /resume to download role-specific CV",
+        ml: "ML Pipeline — CERBERUS:\nInput: 455K PCAP flows · 40 features\nFeature selection: Intersection/Union/Consensus hybrid\nReduction: 57% · Final features: 17-22\nModel: XGBoost with SMOTE for class imbalance\nOutput: 8-class malware classification · 88% accuracy\n→ Press 3 to explore interactive confusion matrix",
+      };
+      const response = customResponses[topic]
+        || UPLINK_COMMANDS['/ask'].responses[topic]
+        || UPLINK_COMMANDS['/ask'].responses['default'];
       setHistory(prev => [...prev, { type: 'input', text: raw }, { type: 'output', text: response, color: '#9B59B6' }]);
+      return;
+    }
+
+    // Handle /research — navigate to ML Research (layer 3)
+    if (cmd === '/research') {
+      setHistory(prev => [...prev, { type: 'input', text: raw }, { type: 'output', text: 'Routing to Research Lab...', color: '#00FF88' }]);
+      setTimeout(() => onNavigate?.(3), 800);
+      return;
+    }
+
+    // Handle /security — navigate to Security Operations (layer 2)
+    if (cmd === '/security') {
+      setHistory(prev => [...prev, { type: 'input', text: raw }, { type: 'output', text: 'Routing to Security Operations...', color: '#FF2020' }]);
+      setTimeout(() => onNavigate?.(2), 800);
       return;
     }
 
@@ -104,7 +147,7 @@ export default function EmperorTerminal() {
         </motion.div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {['/help', '/projects', '/ask ids', '/ask ml', '/ask cuda', '/resume', '/sudo'].map(cmd => (
+          {['/help', '/projects', 'sentinel', 'who are you', '/ask ml', '/resume', '/sudo'].map(cmd => (
             <button key={cmd} onClick={() => setInput(cmd)} className="px-3 py-1 rounded border font-mono text-[10px] text-gray-500 hover:text-imperial-gold hover:border-imperial-gold/30 transition-colors" style={{ background: '#0D1117', borderColor: '#2A3040' }}>
               {cmd}
             </button>

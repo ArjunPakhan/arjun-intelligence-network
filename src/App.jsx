@@ -67,7 +67,7 @@ export default function App() {
       case 4: return <SystemsThinking />;
       case 5: return <MemoryCore />;
       case 6: return <ClassifiedLab />;
-      case 7: return <UplinkTerminal />;
+      case 7: return <UplinkTerminal onNavigate={handleNavigate} />;
       default: return <HeroSection onNavigate={handleNavigate} />;
     }
   };
