@@ -1,0 +1,267 @@
+{
+  "nodes": [
+    {
+      "id": "aes256",
+      "label": "AES-256",
+      "category": "security",
+      "introduced": "2024-01",
+      "status": "active",
+      "projects": ["SENTINEL"],
+      "insight": "AES-256-CBC provides authenticated encryption for inter-node communication. The IV prevents pattern analysis across encrypted flows.",
+      "connections": ["distributed-ids", "flask-api"]
+    },
+    {
+      "id": "iot-security",
+      "label": "IoT Security",
+      "category": "security",
+      "introduced": "2024-06",
+      "status": "active",
+      "projects": ["CERBERUS", "SENTINEL"],
+      "insight": "IoT devices generate heterogeneous telemetry that requires specialized feature engineering — standard network flow features don't transfer directly.",
+      "connections": ["xgboost", "smote", "distributed-ids", "random-forest"]
+    },
+    {
+      "id": "distributed-ids",
+      "label": "Distributed IDS",
+      "category": "security",
+      "introduced": "2024-03",
+      "status": "completed",
+      "projects": ["SENTINEL"],
+      "insight": "3.5M network flows across 10 attack classes. The ensemble approach (RF + XGBoost + Isolation Forest) achieved 99.7% — no single model gets above 97%.",
+      "connections": ["aes256", "flask-api", "random-forest", "xgboost", "ml-pipeline"]
+    },
+    {
+      "id": "vader",
+      "label": "Security Module",
+      "category": "security",
+      "introduced": "2025-01",
+      "status": "active",
+      "projects": ["NEXUS"],
+      "insight": "The SECURITY module in AIN routes all vulnerability scanning and threat analysis through a dedicated Llama 3.1 405B instance via NVIDIA NIM.",
+      "connections": ["distributed-ids", "multi-agent-ai"]
+    },
+    {
+      "id": "xgboost",
+      "label": "XGBoost",
+      "category": "ml",
+      "introduced": "2024-06",
+      "status": "active",
+      "projects": ["CERBERUS", "SENTINEL"],
+      "insight": "Best balance of accuracy (88%) and inference speed for IoT malware. Native handling of class imbalance via scale_pos_weight. Feature importance is interpretable for IEEE papers.",
+      "connections": ["iot-security", "distributed-ids", "smote", "feature-selection", "random-forest", "ml-pipeline"]
+    },
+    {
+      "id": "random-forest",
+      "label": "Random Forest",
+      "category": "ml",
+      "introduced": "2024-03",
+      "status": "active",
+      "projects": ["SENTINEL"],
+      "insight": "99.7% on network flows — the baseline that proved ensemble methods work for IDS. Parallelizable, interpretable, fast inference.",
+      "connections": ["distributed-ids", "xgboost", "ml-pipeline", "isolation-forest"]
+    },
+    {
+      "id": "smote",
+      "label": "SMOTE",
+      "category": "ml",
+      "introduced": "2024-08",
+      "status": "active",
+      "projects": ["CERBERUS"],
+      "insight": "Synthetic minority oversampling was critical — IoT malware classes ranged from 200 to 50K samples. Without SMOTE, the model biased toward majority classes.",
+      "connections": ["iot-security", "xgboost", "feature-selection"]
+    },
+    {
+      "id": "isolation-forest",
+      "label": "Isolation Forest",
+      "category": "ml",
+      "introduced": "2024-04",
+      "status": "active",
+      "projects": ["SENTINEL"],
+      "insight": "Unsupervised anomaly detection as a complementary signal. 94% on anomalies but can't classify — works best as a pre-filter in the ensemble.",
+      "connections": ["distributed-ids", "random-forest", "ml-pipeline"]
+    },
+    {
+      "id": "ml-pipeline",
+      "label": "ML Pipeline",
+      "category": "ml",
+      "introduced": "2024-03",
+      "status": "active",
+      "projects": ["SENTINEL", "CERBERUS"],
+      "insight": "End-to-end pipeline: feature extraction → selection → model training → evaluation → deployment. Modular design allows swapping models without breaking the flow.",
+      "connections": ["random-forest", "xgboost", "isolation-forest", "cuda-computing", "flask-api", "feature-selection"]
+    },
+    {
+      "id": "flask-api",
+      "label": "Flask API",
+      "category": "systems",
+      "introduced": "2024-03",
+      "status": "active",
+      "projects": ["SENTINEL"],
+      "insight": "Lightweight REST API for model inference. Handles 500+ requests/sec on a single instance. The bottleneck is feature extraction, not the API layer.",
+      "connections": ["distributed-ids", "aes256", "ml-pipeline", "chromadb"]
+    },
+    {
+      "id": "chromadb",
+      "label": "ChromaDB",
+      "category": "systems",
+      "introduced": "2025-01",
+      "status": "active",
+      "projects": ["NEXUS"],
+      "insight": "Vector store for the MEMORY module. Embeds research notes, project logs, and past decisions. Enables semantic retrieval across the entire knowledge base.",
+      "connections": ["multi-agent-ai", "flask-api", "ollama"]
+    },
+    {
+      "id": "ollama",
+      "label": "Ollama",
+      "category": "systems",
+      "introduced": "2025-01",
+      "status": "active",
+      "projects": ["NEXUS"],
+      "insight": "Local inference for privacy-sensitive tasks. Runs Hermes 3 for the STRATEGY and ADVISOR modules. Zero cloud latency for reasoning tasks.",
+      "connections": ["multi-agent-ai", "chromadb", "cuda-computing"]
+    },
+    {
+      "id": "cuda-computing",
+      "label": "CUDA Computing",
+      "category": "systems",
+      "introduced": "2025-03",
+      "status": "active",
+      "projects": ["VANGUARD"],
+      "insight": "Custom CUDA kernels for transformer attention. Mixed-precision (FP16/BF16) compute pipeline targeting 3x inference speedup over PyTorch default.",
+      "connections": ["ml-pipeline", "ollama", "multi-agent-ai", "ghost-adversarial", "ghost-transformer", "ghost-gpu-cluster"]
+    },
+    {
+      "id": "multi-agent-ai",
+      "label": "Multi-Agent AI",
+      "category": "systems",
+      "introduced": "2025-01",
+      "status": "active",
+      "projects": ["NEXUS"],
+      "insight": "6 specialized modules: COMMAND, SECURITY, RESEARCH, STRATEGY, MEMORY, ADVISOR. Each module does one thing well. The orchestrator routes, not reasons.",
+      "connections": ["chromadb", "ollama", "cuda-computing", "vader", "upi-research"]
+    },
+    {
+      "id": "upi-research",
+      "label": "UPI Research",
+      "category": "research",
+      "introduced": "2024-06",
+      "status": "completed",
+      "projects": ["CERBERUS (published)"],
+      "insight": "70% of Gen Z UPI transactions under ₹500. Peak fraud window 7-10 PM. Neurofinance framework applied — cognitive biases map directly to transaction patterns.",
+      "connections": ["multi-agent-ai", "heatsense", "feature-selection"]
+    },
+    {
+      "id": "heatsense",
+      "label": "HeatSense",
+      "category": "research",
+      "introduced": "2025-01",
+      "status": "development",
+      "projects": ["ATHENA"],
+      "insight": "Fusing satellite thermal imagery with smartphone sensors and NDVI maps. The challenge is temporal alignment — satellite passes are periodic, phone data is continuous.",
+      "connections": ["upi-research", "ml-pipeline", "feature-selection"]
+    },
+    {
+      "id": "feature-selection",
+      "label": "Feature Selection",
+      "category": "research",
+      "introduced": "2024-08",
+      "status": "active",
+      "projects": ["CERBERUS"],
+      "insight": "Hybrid feature selection achieved 57% dimensionality reduction (20 → 9 features) while maintaining 88% accuracy. The key insight: flow-level metadata alone classifies most IoT malware.",
+      "connections": ["xgboost", "smote", "iot-security", "ml-pipeline", "heatsense", "upi-research"]
+    },
+    {
+      "id": "ghost-adversarial",
+      "label": "Adversarial ML",
+      "category": "ghost",
+      "introduced": "2026-01",
+      "status": "planned",
+      "projects": [],
+      "insight": "Planned: Adversarial robustness testing for IDS models. How do evasion attacks affect detection accuracy?",
+      "connections": ["cuda-computing", "xgboost", "distributed-ids"]
+    },
+    {
+      "id": "ghost-transformer",
+      "label": "Transformer Anomaly",
+      "category": "ghost",
+      "introduced": "2026-03",
+      "status": "planned",
+      "projects": [],
+      "insight": "Planned: Transformer-based anomaly detection using self-attention over network flow sequences. Requires GPU infrastructure.",
+      "connections": ["cuda-computing", "ml-pipeline", "distributed-ids"]
+    },
+    {
+      "id": "ghost-gpu-cluster",
+      "label": "GPU Cluster",
+      "category": "ghost",
+      "introduced": "2026-06",
+      "status": "planned",
+      "projects": [],
+      "insight": "Planned: Multi-node GPU orchestration for large-scale model training and federated learning across IoT devices.",
+      "connections": ["cuda-computing", "multi-agent-ai", "ollama"]
+    }
+  ],
+  "edges": [
+    { "source": "xgboost", "target": "iot-security", "strength": 1.0, "type": "solid" },
+    { "source": "xgboost", "target": "distributed-ids", "strength": 0.9, "type": "solid" },
+    { "source": "smote", "target": "iot-security", "strength": 0.9, "type": "solid" },
+    { "source": "aes256", "target": "distributed-ids", "strength": 1.0, "type": "solid" },
+    { "source": "chromadb", "target": "multi-agent-ai", "strength": 0.8, "type": "animated" },
+    { "source": "cuda-computing", "target": "ml-pipeline", "strength": 0.7, "type": "dashed" },
+    { "source": "random-forest", "target": "distributed-ids", "strength": 0.9, "type": "solid" },
+    { "source": "random-forest", "target": "xgboost", "strength": 0.6, "type": "dotted" },
+    { "source": "isolation-forest", "target": "distributed-ids", "strength": 0.7, "type": "dotted" },
+    { "source": "isolation-forest", "target": "random-forest", "strength": 0.5, "type": "dotted" },
+    { "source": "flask-api", "target": "distributed-ids", "strength": 0.8, "type": "solid" },
+    { "source": "flask-api", "target": "ml-pipeline", "strength": 0.7, "type": "solid" },
+    { "source": "flask-api", "target": "aes256", "strength": 0.6, "type": "dotted" },
+    { "source": "ml-pipeline", "target": "random-forest", "strength": 0.8, "type": "solid" },
+    { "source": "ml-pipeline", "target": "xgboost", "strength": 0.8, "type": "solid" },
+    { "source": "ml-pipeline", "target": "isolation-forest", "strength": 0.6, "type": "dotted" },
+    { "source": "smote", "target": "xgboost", "strength": 0.8, "type": "solid" },
+    { "source": "smote", "target": "feature-selection", "strength": 0.7, "type": "dotted" },
+    { "source": "feature-selection", "target": "xgboost", "strength": 0.9, "type": "solid" },
+    { "source": "feature-selection", "target": "iot-security", "strength": 0.7, "type": "dotted" },
+    { "source": "feature-selection", "target": "ml-pipeline", "strength": 0.6, "type": "dotted" },
+    { "source": "multi-agent-ai", "target": "ollama", "strength": 0.8, "type": "animated" },
+    { "source": "multi-agent-ai", "target": "vader", "strength": 0.7, "type": "dotted" },
+    { "source": "multi-agent-ai", "target": "upi-research", "strength": 0.4, "type": "dotted" },
+    { "source": "ollama", "target": "chromadb", "strength": 0.6, "type": "dotted" },
+    { "source": "ollama", "target": "cuda-computing", "strength": 0.5, "type": "dashed" },
+    { "source": "cuda-computing", "target": "ollama", "strength": 0.5, "type": "dashed" },
+    { "source": "cuda-computing", "target": "multi-agent-ai", "strength": 0.6, "type": "dashed" },
+    { "source": "upi-research", "target": "heatsense", "strength": 0.4, "type": "dotted" },
+    { "source": "heatsense", "target": "ml-pipeline", "strength": 0.5, "type": "dotted" },
+    { "source": "heatsense", "target": "feature-selection", "strength": 0.4, "type": "dotted" },
+    { "source": "vader", "target": "distributed-ids", "strength": 0.6, "type": "dotted" },
+    { "source": "ghost-adversarial", "target": "cuda-computing", "strength": 0.3, "type": "dotted" },
+    { "source": "ghost-adversarial", "target": "xgboost", "strength": 0.3, "type": "dotted" },
+    { "source": "ghost-transformer", "target": "cuda-computing", "strength": 0.3, "type": "dotted" },
+    { "source": "ghost-transformer", "target": "ml-pipeline", "strength": 0.3, "type": "dotted" },
+    { "source": "ghost-gpu-cluster", "target": "cuda-computing", "strength": 0.3, "type": "dotted" },
+    { "source": "ghost-gpu-cluster", "target": "multi-agent-ai", "strength": 0.3, "type": "dotted" }
+  ],
+  "researchNotes": [
+    { "id": "n1", "title": "CICFlowMeter Feature Engineering", "content": "79 features per flow. Timing features (IAT) are most discriminative for DoS. Volume features distinguish data exfiltration.", "category": "security", "date": "2024-03" },
+    { "id": "n2", "title": "SMOTE vs ADASYN for IoT", "content": "SMOTE performed better for IoT malware — ADASYN generates noisy samples near class boundaries. k=5 neighbors optimal.", "category": "ml", "date": "2024-08" },
+    { "id": "n3", "title": "HeatSense Satellite Pipeline", "content": "Landsat 8/9 thermal bands at 100m resolution. Temporal alignment with ground sensors requires interpolation.", "category": "research", "date": "2025-02" },
+    { "id": "n4", "title": "XGBoost Hyperparameter Sweep", "content": "max_depth=6, n_estimators=200, learning_rate=0.1 optimal for IoT. Higher depth overfits on minority classes.", "category": "ml", "date": "2024-09" }
+  ],
+  "projectLogs": [
+    { "id": "p1", "operation": "SENTINEL", "title": "3-Node IDS Deployment", "content": "Mumbai → Nagpur → Cloud. AES-256 encrypted channels. Flask API handles 500 req/sec.", "date": "2024-05", "status": "completed" },
+    { "id": "p2", "operation": "CERBERUS", "title": "57% Feature Reduction", "content": "Hybrid selection: filter (mutual information) + wrapper (recursive feature elimination). 20 → 9 features.", "date": "2024-09", "status": "completed" },
+    { "id": "p3", "operation": "NEXUS", "title": "6-Module Architecture", "content": "COMMAND → SECURITY → RESEARCH → STRATEGY → MEMORY → ADVISOR. Each module独立, orchestrator routes.", "date": "2025-01", "status": "active" },
+    { "id": "p4", "operation": "VANGUARD", "title": "CUDA Kernel Benchmarks", "content": "Custom attention kernel: 2.8x over PyTorch default. Mixed-precision pipeline in architecture phase.", "date": "2025-05", "status": "active" }
+  ],
+  "lessonsLearned": [
+    { "id": "l1", "lesson": "Class imbalance breaks accuracy metrics", "detail": "99% accuracy on 99:1 imbalance means the model just predicts majority class. Use F1, precision, recall.", "project": "CERBERUS" },
+    { "id": "l2", "lesson": "Feature selection > model complexity", "detail": "XGBoost with 9 features outperforms deep nets with 79. Simpler models generalize better on small security datasets.", "project": "CERBERUS" },
+    { "id": "l3", "lesson": "Distributed systems need consistent hashing", "detail": "Node failures in IDS caused cascading re-balancing. Consistent hashing fixed the hot-spot problem.", "project": "SENTINEL" },
+    { "id": "l4", "lesson": "Interpretability matters for research", "detail": "IEEE reviewers want to know WHY a model works. XGBoost feature importance > black-box neural nets for published research.", "project": "SENTINEL" }
+  ],
+  "futureIdeas": [
+    { "id": "f1", "title": "Federated Learning for IoT Privacy", "content": "Train models across IoT devices without centralizing data. Differential privacy guarantees.", "status": "concept" },
+    { "id": "f2", "title": "Transformer-Based Anomaly Detection", "content": "Self-attention over flow sequences. Context window captures temporal attack patterns that tree methods miss.", "status": "research" },
+    { "id": "f3", "title": "GPU Cluster Orchestrator", "content": "Multi-node GPU task scheduling. Kubernetes for ML workloads. Auto-scaling based on training queue depth.", "status": "planned" }
+  ]
+}

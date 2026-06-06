@@ -1,0 +1,47 @@
+[
+  {
+    "id": "post-001",
+    "title": "Building a distributed IDS taught me something no DSA problem ever did",
+    "preview": "Systems don't fail because someone couldn't write a loop. They fail because assumptions weren't questioned.",
+    "category": "cross-domain",
+    "date": "2026-04-22",
+    "url": "https://www.linkedin.com/posts/arjunpakhan_systemsthinking-softwareengineering-techcareers-activity-7451287513647988736-aB-8?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAEU-0P8BuC4iHsEYOhbSAyHgJg-KucNms-E",
+    "tags": ["SystemsThinking", "SoftwareEngineering"]
+  },
+  {
+    "id": "post-002",
+    "title": "Nobody overspends because they lack willpower",
+    "preview": "They overspend because someone spent millions designing the system to make sure they would.",
+    "category": "human-behavior",
+    "date": "2026-04-28",
+    "url": "https://www.linkedin.com/posts/arjunpakhan_neurofinance-behavioraleconomics-upi-activity-7452547993624469504-ZR5t?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAEU-0P8BuC4iHsEYOhbSAyHgJg-KucNms-E",
+    "tags": ["BehavioralEconomics", "Neurofinance", "UPI"]
+  },
+  {
+    "id": "post-003",
+    "title": "In 2016, Mirai took down Twitter through home cameras and DVRs",
+    "preview": "We now have 3x more IoT devices than people on earth. The vulnerabilities haven't kept up.",
+    "category": "technical-insight",
+    "date": "2026-05-01",
+    "url": "https://www.linkedin.com/posts/arjunpakhan_cybersecurity-iot-machinelearning-activity-7455088470701604865-p_OY?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAEU-0P8BuC4iHsEYOhbSAyHgJg-KucNms-E",
+    "tags": ["CyberSecurity", "IoT", "MachineLearning"]
+  },
+  {
+    "id": "post-004",
+    "title": "My model hit 88% accuracy. I should have felt good about that.",
+    "preview": "Instead my first thought was: what is it missing in the other 12%? And then a harder question followed.",
+    "category": "technical-insight",
+    "date": "2026-05-08",
+    "url": "PLACEHOLDER_UPDATE_WITH_REAL_URL",
+    "tags": ["CyberSecurity", "MachineLearning", "AIFecurity"]
+  },
+  {
+    "id": "post-005",
+    "title": "I built my own Jarvis. Named the agents after Star Wars characters.",
+    "preview": "Not for the theme. For the function. Six agents. Each one a different model. Each one chosen for a specific reason.",
+    "category": "behind-the-build",
+    "date": "2026-05-04",
+    "url": "https://www.linkedin.com/posts/arjunpakhan_multiagentsystems-localai-machinelearning-activity-7457119893876883456-N3Sg?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAEU-0P8BuC4iHsEYOhbSAyHgJg-KucNms-E",
+    "tags": ["MultiAgentSystems", "LocalAI", "AIEngineering"]
+  }
+]

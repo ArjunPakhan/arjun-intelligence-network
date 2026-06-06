@@ -1,0 +1,133 @@
+[
+  {
+    "id": "ec-council-codered",
+    "title": "EC-Council CodeRed — SQL Injection",
+    "issuer": "EC-Council",
+    "date": "2024",
+    "certificateId": "#493668",
+    "category": "security",
+    "roles": ["cybersecurity", "backend"],
+    "status": "completed",
+    "description": "SQL injection attack vectors, detection patterns, and prevention methodologies.",
+    "url": ""
+  },
+  {
+    "id": "nvidia-deep-learning",
+    "title": "NVIDIA Deep Learning Institute",
+    "issuer": "NVIDIA",
+    "date": "2025",
+    "certificateId": null,
+    "category": "ml",
+    "roles": ["ml-engineer", "ai-engineer", "research"],
+    "status": "completed",
+    "description": "GPU-accelerated deep learning, CUDA programming, and neural network training.",
+    "url": ""
+  },
+  {
+    "id": "google-python",
+    "title": "Google Python Automation",
+    "issuer": "Google / Coursera",
+    "date": "2024",
+    "certificateId": null,
+    "category": "programming",
+    "roles": ["backend", "ml-engineer"],
+    "status": "completed",
+    "description": "Python scripting, automation, and data processing pipelines.",
+    "url": ""
+  },
+  {
+    "id": "ibm-cybersecurity",
+    "title": "IBM Cybersecurity Analyst",
+    "issuer": "IBM / Coursera",
+    "date": "2024",
+    "certificateId": null,
+    "category": "security",
+    "roles": ["cybersecurity"],
+    "status": "completed",
+    "description": "Threat detection, incident response, and security information management.",
+    "url": ""
+  },
+  {
+    "id": "microsoft-azure-ai",
+    "title": "Microsoft Azure AI Fundamentals",
+    "issuer": "Microsoft",
+    "date": "2024",
+    "certificateId": null,
+    "category": "cloud",
+    "roles": ["ai-engineer", "backend"],
+    "status": "completed",
+    "description": "Azure AI services, cognitive APIs, and cloud ML deployment.",
+    "url": ""
+  },
+  {
+    "id": "tensorflow-developer",
+    "title": "TensorFlow Developer Certificate",
+    "issuer": "Google",
+    "date": "2025",
+    "certificateId": null,
+    "category": "ml",
+    "roles": ["ml-engineer", "ai-engineer"],
+    "status": "completed",
+    "description": "Building and training neural networks using TensorFlow and Keras.",
+    "url": ""
+  },
+  {
+    "id": "ec-council-sql",
+    "title": "SQL Injection Attacks",
+    "issuer": "EC-Council CodeRed",
+    "date": "April 2026",
+    "credentialId": "493668",
+    "category": "security",
+    "roles": ["cybersecurity", "backend"],
+    "status": "completed",
+    "description": "SQL injection attack vectors, detection patterns, and prevention methodologies.",
+    "url": ""
+  },
+  {
+    "id": "nptel-supply-chain",
+    "title": "Supply Chain Digitization",
+    "issuer": "NPTEL — IIT Bombay",
+    "date": "Jan–Apr 2026",
+    "grade": "Elite (61%)",
+    "credits": 4,
+    "certificateId": "NPTEL26MG12S165400024",
+    "category": "programming",
+    "roles": ["research", "backend", "ml"],
+    "status": "completed",
+    "description": "Supply chain digitization, analytics, and optimization.",
+    "url": ""
+  },
+  {
+    "id": "activeloop-finetuning",
+    "title": "Fine-Tuning LLMs",
+    "issuer": "ActiveLoop",
+    "date": "2026",
+    "category": "ml",
+    "roles": ["ai", "ml"],
+    "status": "in-progress",
+    "description": "Fine-tuning large language models for domain-specific tasks.",
+    "url": ""
+  },
+  {
+    "id": "activeloop-rag",
+    "title": "RAG for Production",
+    "issuer": "ActiveLoop",
+    "date": "2026",
+    "category": "ml",
+    "roles": ["ai", "ml"],
+    "status": "in-progress",
+    "description": "Retrieval-Augmented Generation systems for production deployments.",
+    "url": ""
+  },
+  {
+    "id": "wandb-rag",
+    "title": "RAG++ POC to Production",
+    "issuer": "Weights & Biases",
+    "date": "2026",
+    "category": "ml",
+    "roles": ["ai", "ml", "research"],
+    "status": "in-progress",
+    "description": "Advanced RAG techniques from proof-of-concept to production scale.",
+    "url": ""
+  }
+]
