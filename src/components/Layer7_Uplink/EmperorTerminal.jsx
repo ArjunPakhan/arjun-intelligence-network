@@ -57,11 +57,11 @@ export default function EmperorTerminal({ onNavigate }) {
     if (cmd === '/ask' && parts.length > 1) {
       const topic = parts[1].toLowerCase();
       const customResponses = {
-        sentinel: "SENTINEL — Secure Distributed IDS\n3.5M network flow records analyzed\n10 attack classes · 99.7% detection accuracy\nStack: Java · Flask · XGBoost · AES-256\nStatus: IEEE paper submitted\n→ Press 2 to open Security Operations",
-        cerberus: "CERBERUS — IoT Malware Detection\n455K+ PCAP samples · 8 malware classes\n57% feature reduction via hybrid selection\n~88% XGBoost accuracy on imbalanced data\nStatus: IEEE/Scopus submission in progress\n→ Press 3 to open Research Lab",
-        identity: "AIN — Arjun Intelligence Network\nOperator: Arjun Pakhan\nDomain: Cybersecurity × ML × GPU Computing\nActive projects: 3 · Papers: 2 · Agents: 6\nCurrently: TIP internship @ Maincrafts Technology\n→ Type /projects for full operation list",
-        unique: "Differentiators:\n→ Built GPU-accelerated IDS with CUDA + NVIDIA NIM\n→ Published neurofinance research on Gen Z UPI behavior\n→ Multi-agent AI system running 405B parameters locally\n→ Systems thinker — not just model builder\n→ Type /resume to download role-specific CV",
-        ml: "ML Pipeline — CERBERUS:\nInput: 455K PCAP flows · 40 features\nFeature selection: Intersection/Union/Consensus hybrid\nReduction: 57% · Final features: 17-22\nModel: XGBoost with SMOTE for class imbalance\nOutput: 8-class malware classification · 88% accuracy\n→ Press 3 to explore interactive confusion matrix",
+        sentinel: "SENTINEL -- Secure Distributed IDS\n3.5M network flow records analyzed\n10 attack classes -- 99.7% detection accuracy\nStack: Java + Flask + XGBoost + AES-256\nStatus: IEEE paper submitted\n-> Press 2 to open Security Operations",
+        cerberus: "CERBERUS -- IoT Malware Detection\n455K+ PCAP samples -- 8 malware classes\n57% feature reduction via hybrid selection\n~88% XGBoost accuracy on imbalanced data\nStatus: IEEE/Scopus submission in progress\n-> Press 3 to open Research Lab",
+        identity: "AIN -- Arjun Intelligence Network\nOperator: Arjun Pakhan\nDomain: Cybersecurity x ML x GPU Computing\nActive projects: 3 -- Papers: 2 -- Agents: 6\nCurrently: TIP internship @ Maincrafts Technology\n-> Type /projects for full operation list",
+        unique: "Differentiators:\n-> Built GPU-accelerated IDS with CUDA + NVIDIA NIM\n-> Published neurofinance research on Gen Z UPI behavior\n-> Multi-agent AI system running 405B parameters locally\n-> Systems thinker -- not just model builder\n-> Type /resume to download role-specific CV",
+        ml: "ML Pipeline -- CERBERUS:\nInput: 455K PCAP flows -- 40 features\nFeature selection: Intersection/Union/Consensus hybrid\nReduction: 57% -- Final features: 17-22\nModel: XGBoost with SMOTE for class imbalance\nOutput: 8-class malware classification -- 88% accuracy\n-> Press 3 to explore interactive confusion matrix",
       };
       const response = customResponses[topic]
         || UPLINK_COMMANDS['/ask'].responses[topic]
