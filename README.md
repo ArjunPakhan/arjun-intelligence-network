@@ -2,7 +2,7 @@
 
 > A portfolio built as an operating system, not a webpage.
 
-Live: [arjunpakhan.dev]([https://arjunpakhan.dev](https://arjun-intelligence-network.vercel.app/))
+Live: [arjun-intelligence-network.vercel.app](https://arjun-intelligence-network.vercel.app)
 
 ---
 
@@ -121,7 +121,7 @@ npm run build
 
 - LinkedIn: [linkedin.com/in/arjunpakhan](https://linkedin.com/in/arjunpakhan)
 - GitHub: [github.com/ArjunPakhan](https://github.com/ArjunPakhan)
-- Email: arjun@arjunpakhan.dev
+- Email: arjunpakhan@gmail.com
 
 ---
 
