@@ -6,6 +6,7 @@ import Navigation from './components/Shared/Navigation';
 import StatusBar from './components/Shared/StatusBar';
 import ResearchTimeline from './components/Shared/ResearchTimeline';
 import RecruiterMode from './components/Shared/RecruiterMode';
+import AINAgent from './components/Shared/AINAgent';
 import { LAYERS } from './utils/constants';
 
 const CommandCenter = lazy(() => import('./components/Layer1_Emperor/EmperorAbout'));
@@ -67,7 +68,7 @@ export default function App() {
       case 4: return <SystemsThinking />;
       case 5: return <MemoryCore />;
       case 6: return <ClassifiedLab />;
-      case 7: return <UplinkTerminal onNavigate={handleNavigate} />;
+      case 7: return <UplinkTerminal />;
       default: return <HeroSection onNavigate={handleNavigate} />;
     }
   };
@@ -104,6 +105,7 @@ export default function App() {
               <ResearchTimeline onClose={() => setShowTimeline(false)} onNavigate={handleNavigate} />
             )}
           </AnimatePresence>
+          <AINAgent />
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
